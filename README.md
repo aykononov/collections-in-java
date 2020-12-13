@@ -26,7 +26,8 @@
 
 **Stack** — список, который реализует данные *стека*. Элементы размещаются по принципу LIFO (last-in, first-out) — последний пришел, первым ушел.
 
-[пример ListExample](https://github.com/aykononov/collections-in-java)
+[пример ListExample.java](https://github.com/aykononov/collections-in-java/blob/main/src/main/java/ListExample.java "https://github.com/aykononov/collections-in-java/blob/main/src/main/java/ListExample.java")
+
 ```java
 import java.util.ArrayList;
 import java.util.List;
