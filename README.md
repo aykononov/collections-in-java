@@ -2,7 +2,9 @@
 
 [Коллекции в Java](https://java-master.com/коллекции-в-java/ "https://java-master.com/коллекции-в-java/")
 
-### В чем еще преимущество использования коллекций:
+## Коллекция — это объект, который хранит другие объекты.
+
+### В чем преимущество использования коллекций:
 
 * удобство тестирования кода;
 * структуры данных на любой вкус и потребность;
@@ -25,6 +27,8 @@
 **Vector** — тот же самый *ArrayList* с той разницей, что методы данной коллекции синхронизированы. То есть, *потокобезобасны*.
 
 **Stack** — список, который реализует данные *стека*. Элементы размещаются по принципу LIFO (last-in, first-out) — последний пришел, первым ушел.
+
+<details><summary>ListExample...</summary>
 
 ```java
 import java.util.ArrayList;
@@ -58,16 +62,19 @@ public class ListExample {
 Поиск элемнта начинающегося c (I): ivan
  */
 ```
+</details>
 
 [пример ListExample.java](https://github.com/aykononov/collections-in-java/blob/main/src/main/java/ListExample.java "https://github.com/aykononov/collections-in-java/blob/main/src/main/java/ListExample.java")
 
-**Set** — коллекция, которая не содержит повторяющихся элементов, т.е. в сет можно добавить только уникальные объекты. Методы данной структуры такие же как в *List*.
+**Set** — коллекция, которая не содержит повторяющихся элементов, т.е. в сет можно добавить только уникальные объекты. Методы данной структуры такие же, как и в *List*.
 
 **HashSet** — набор, в котором элементы хранятся в *хеш-таблице*. У элементов нет строгого порядка. *HashSet* использует метод *hashCode*  для определения своих элементов и размещения их в наборе.
 
 **LinkedHashSet** — элементы хранятся в виде *связанного списка*. Только элементы хранятся в *сортированном* виде.
 
 **TreeSet** — хранит элементы в структуре данных *дерева*, которая также сортируется и доступна для навигации. Методы добавить, удалить и получить элемент, гарантируют работу в log(n) времени, где n — количество элементов в дереве.
+
+<details><summary>SetExample...</summary>
 
 ```java
 import java.util.Set;
@@ -94,6 +101,7 @@ public class SetExample {
 [15, 30]
  */
 ```
+</details>
 
 [пример SetExample.java](https://github.com/aykononov/collections-in-java/blob/main/src/main/java/SetExample.java "https://github.com/aykononov/collections-in-java/blob/main/src/main/java/SetExample.java")
 
@@ -102,6 +110,8 @@ public class SetExample {
 Отличия от стандартных методов *Collection* заключаются в том, что если стандартные методы генерируют *исключения*, то методы Queue возвращают специальное значение.
 
 **PriorityQueue** — очередь, в которой элементы упорядочиваются на основании заданного вами параметра(в отличие от параметра на основе FIFO). Эта очередь упорядочивает элементы либо по их натуральному порядку (используя интерфейс Comparable), либо с помощью интерфейса Comparator, полученному в конструкторе.
+
+<details><summary>QueueExample...</summary>
 
 ```java
 import java.util.Comparator;
@@ -149,5 +159,120 @@ public class QueueExample {
 
  */
 ```
+</details>
 
 [пример QueueExample.java](https://github.com/aykononov/collections-in-java/blob/main/src/main/java/QueueExample.java "https://github.com/aykononov/collections-in-java/blob/main/src/main/java/QueueExample.java")
+
+**Map** — это структура данных, которая хранит данные в виде <Ключ, Значение>. Каждое значение можно найти по его ключу. 
+
+* *Map* не может содержать дубликаты ключей;
+* каждый ключ может отображать только одно значение;
+* *Map* не расширяет интерфейс *Collection*.
+
+У интерфейса *Map* есть несколько реализаций. Самые используемые и популярные это: *HashMap<K, V>, TreeMap<K, V>*.
+
+**HashMap** — хранит ключи в *хэш-таблицы*. Она имеет наибольшую производительность. Однако такая реализация не гарантирует порядок элементов.
+
+**TreeMap** — хранит ключи в *отсортированном* порядке. Работает медленнее, чем *HashMap*.
+
+**LinkedHashMap** — хранит ключи в порядке их вставки в *Map*. Работает немного медленнее, чем *HashMap*.
+
+**WeakHashMap** — реализация интерфейса *Map* на основе *хэш-таблицы* со слабыми ключами. Запись в WeakHashMap будет автоматически удалена, если ее ключ больше не используется обычным образом.
+
+Скорость работы **HashMap** О(1), а в худшем случае O(logn). 
+
+### Чтобы понять, когда будет худший случай, надо разобраться, как это работает:
+
+У каждого объекта есть метод *hashCode*, который возвращает значение *хэш-кода*. Когда мы помещаем объект в *HashMap*, то сначала определяется значение *хэш-кода* его ключа, далее выбирается место, куда поместить объект в зависимости от полученного *хэш-кода*. Если по такому ключу уже есть значение в *мапе*, то проверяется объект, который мы пытаемся добавить и если он такой же как и существующий, то идет *перезапись*. 
+
+Если объекты *разные*, а хэш-код *одинаковый* (произошла *коллизия* или мы неправильно переопределили метод hashCode) объект помещается в ту самую ячейку в виде связанного списка *LinkedList*. Вот откуда худший случай работы *HashMap*. Когда хэш-код ключей *одинаковый*, то эта структура начинает работать, как *LinkedList* скорость которого O(logn). 
+
+<details><summary>Как правильно переопределить метод hashCode, чтобы он возвращал одинаковое значение для всех объектов...</summary>
+
+```java
+public class MapOverrideMethod {
+
+    private String name;
+    private double sum;
+
+    public MapOverrideMethod(String name, double sum) {
+        this.name = name;
+        this.sum = sum;
+    }
+
+    @Override
+    public int hashCode() {
+        return 1;
+    }
+
+    public static void main(String[] args) {
+        
+        MapOverrideMethod example1 = new MapOverrideMethod("Some name", 34);
+        MapOverrideMethod example2 = new MapOverrideMethod("Another name", 12.5);
+        System.out.println(example1.hashCode());
+        System.out.println(example2.hashCode());
+        
+    }
+
+}
+
+/* ------------
+1
+1
+ */
+```
+</details>
+
+[переопределить метод hashCode - MapOverrideMethod.java](https://github.com/aykononov/collections-in-java/blob/main/src/main/java/MapOverrideMethod.java "https://github.com/aykononov/collections-in-java/blob/main/src/main/java/MapOverrideMethod.java")
+
+<details><summary>MapExample...</summary>
+
+```java
+import java.util.HashMap;
+import java.util.Map;
+
+public class MapExample {
+
+    public static void main(String[] args) {
+
+        Map<Integer, String> users = new HashMap<>();
+        users.put(1, "Ivan");//добавление элементов
+        users.put(2, "Nataliya");
+        users.put(3, "Anton");
+        System.out.println("Получение по ключу (2): " + users.get(2));
+        System.out.println("Проверка, существует ли значение с ключем (1): " + users.containsKey(1));
+        System.out.println("Удаление по ключу (1): " + users.remove(1));
+        System.out.println("Проверка, существует ли значение с ключем (1): " + users.containsKey(1));
+        System.out.println("Размер мапы: " + users.size());
+        System.out.println("Проверка пустая ли мапа: " + users.isEmpty());
+        System.out.println("Элегантный вывод... ");
+        users.forEach((k, v) -> System.out.println(k + ": " + v));
+
+    }
+}
+
+/* --------------------------------------------------
+Получение по ключу (2): Nataliya
+Проверка, существует ли значение с ключем (1): true
+Удаление по ключу (1): Ivan
+Проверка, существует ли значение с ключем (1): false
+Размер мапы: 2
+Проверка пустая ли мапа: false
+Элегантный вывод... 
+2: Nataliya
+3: Anton
+
+ */
+
+```
+</details>
+
+Пример в которм рассмотрены, только самые популярные методы. Они во всех реализациях одинаковы.
+
+[пример MapExample.java](https://github.com/aykononov/collections-in-java/blob/main/src/main/java/MapExample.java "https://github.com/aykononov/collections-in-java/blob/main/src/main/java/MapExample.java")
+
+Важно о Map в java:
+
+* желательно не использовать ключи, которые могут изменяться. Так можно потерять доступ к объекту;
+* желательно всегда переопределять методы equals и hashCode в объектов, которые вы будете сравнивать, помещать или извлекать с коллекции (не только мап);
+* две мапы равны если у них один и тот же набор пары ключ-значение.
