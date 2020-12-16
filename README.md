@@ -63,9 +63,10 @@ public class ListExample {
 Поиск элемнта начинающегося c (I): ivan
  */
 ```
-</details>
 
 [пример ListExample.java](https://github.com/aykononov/collections-in-java/blob/main/src/main/java/ListExample.java "https://github.com/aykononov/collections-in-java/blob/main/src/main/java/ListExample.java")
+
+</details>
 
 ### тест скорости работы колллекций ArrayList и LinkedList
 
@@ -148,9 +149,10 @@ public class SetExample {
 [15, 30]
  */
 ```
-</details>
 
 [пример SetExample.java](https://github.com/aykononov/collections-in-java/blob/main/src/main/java/SetExample.java "https://github.com/aykononov/collections-in-java/blob/main/src/main/java/SetExample.java")
+
+</details>
 
 **Queue** — коллекция, которая хранит элементы в определенном порядке, нужном для их обработки. Помимо основных методов *Collection* в этом интерфейсе добавлены дополнительные методы вставки, проверки, извлечения. В данной коллекции элементы обычно размещаются в порядке FIFO (first-in, first-out) — первым пришел, первым ушел.  
 
@@ -206,9 +208,10 @@ public class QueueExample {
 
  */
 ```
-</details>
 
 [пример QueueExample.java](https://github.com/aykononov/collections-in-java/blob/main/src/main/java/QueueExample.java "https://github.com/aykononov/collections-in-java/blob/main/src/main/java/QueueExample.java")
+
+</details>
 
 **Map** — это структура данных, которая хранит данные в виде <Ключ, Значение>. Каждое значение можно найти по его ключу. 
 
@@ -268,9 +271,10 @@ public class MapOverrideMethod {
 1
  */
 ```
-</details>
 
 [переопределить метод hashCode - MapOverrideMethod.java](https://github.com/aykononov/collections-in-java/blob/main/src/main/java/MapOverrideMethod.java "https://github.com/aykononov/collections-in-java/blob/main/src/main/java/MapOverrideMethod.java")
+
+</details>
 
 Пример в которм рассмотрены, только самые популярные методы. Они во всех реализациях одинаковы.
 
@@ -314,9 +318,10 @@ public class MapExample {
  */
 
 ```
-</details>
 
 [пример MapExample.java](https://github.com/aykononov/collections-in-java/blob/main/src/main/java/MapExample.java "https://github.com/aykononov/collections-in-java/blob/main/src/main/java/MapExample.java")
+
+</details>
 
 Важно о Map в java:
 
