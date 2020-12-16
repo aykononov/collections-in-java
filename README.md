@@ -18,12 +18,12 @@
 
 ### От этих интерфейсов идет реализация классов:
 
-**ArrayList** — коллекция построена на основе *массива*. Имеет свойство изменять свой размер в зависимости от того удаляются или добавляются элементы.
-Его предпочтительнее использовать для *поиска* и *изменения* элементов, потому что этот класс использует *индексы* для доступа к соответствующему элементу массива.
+**ArrayList** — коллекция построена на основе *массива*. Имеет свойство изменять свой размер в зависимости от того удаляются или добавляются элементы.  
+Его предпочтительнее использовать для *поиска* и *изменения* элементов, так как этот класс использует *индексы* для доступа к соответствующему элементу.  
 Однако *вставка* и *удаление* элементов для него будет выполняться медленнее, так как сначала нужно *сдвигать* на один все элементы, только потом в освободившееся место вставлять новый элемент.
 
-**LinkedList** — коллекция реализована в виде *связанного списка*: набора отдельных элементов, каждый из которых хранит ссылку на следующий и предыдущий элементы.
-Чтобы *вставить* элемент в середину такого списка, достаточно поменять ссылки его будущих соседей. А вот чтобы *получить* элемент напрмиер с номером 130, то нужно пройтись последовательно по всем объектам от 0 до 130. 
+**LinkedList** — коллекция реализована в виде *связанного списка*: набора отдельных элементов, каждый из которых хранит ссылку на следующий и предыдущий элементы.  
+Чтобы *вставить* элемент в середину такого списка, достаточно поменять ссылки его будущих соседей. А вот чтобы *получить* элемент напрмиер с номером 130, то нужно пройтись последовательно по всем объектам от 0 до 130.   
 Поэтому если мы собираемся *вставлять* или *удалять* много элементов в середину коллекции, то лучше использовать *LinkedList*.  
 Во всех остальных случаях предпочтительнее будет *ArrayList*.
 
@@ -66,6 +66,52 @@ public class ListExample {
 </details>
 
 [пример ListExample.java](https://github.com/aykononov/collections-in-java/blob/main/src/main/java/ListExample.java "https://github.com/aykononov/collections-in-java/blob/main/src/main/java/ListExample.java")
+
+### тест скорости работы колллекций ArrayList и LinkedList
+
+<details><summary>CollectionSpeedTest...</summary>
+
+```java
+public class CollectionSpeedTest {
+    public static void main(String[] args) {
+        List<Integer> arrList = new ArrayList<>();
+        List<Integer> linkedList = new LinkedList<>();
+
+        // заполняем колллекции
+        for (int i = 0; i < 1000000; i++) {
+            arrList.add(i);
+            linkedList.add(i);
+        }
+
+        long arrListTime = System.currentTimeMillis();
+        arrList.add(5000, 1111);
+        System.out.println("arrList на вставку: " + (System.currentTimeMillis() - arrListTime));
+
+        arrListTime = System.currentTimeMillis();
+        arrList.get(500000);
+        System.out.println("arrList на поиск: " + (System.currentTimeMillis() - arrListTime));
+
+        long linkedListTime = System.currentTimeMillis();
+        linkedList.add(5000, 1111);
+        System.out.println("\nlinkedList на вставку: " + (System.currentTimeMillis() - linkedListTime));
+
+        linkedListTime = System.currentTimeMillis();
+        linkedList.get(500000);
+        System.out.println("linkedList на поиск: " + (System.currentTimeMillis() - linkedListTime));
+    }
+}
+
+/*-----------------------
+arrList на вставку: 2
+arrList на поиск: 0
+
+linkedList на вставку: 0
+linkedList на поиск: 9
+ */
+```
+[пример CollectionSpeedTest.java](https://github.com/aykononov/collections-in-java/blob/main/src/main/java/CollectionSpeedTest.java "https://github.com/aykononov/collections-in-java/blob/main/src/main/java/CollectionSpeedTest.java")
+
+</details>
 
 **Set** — коллекция, которая не содержит повторяющихся элементов, т.е. в сет можно добавить только уникальные объекты. Методы данной структуры такие же, как и в *List*.
 
