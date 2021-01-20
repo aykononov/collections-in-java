@@ -3,6 +3,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class CollectionSpeedTest {
+
     public static void main(String[] args) {
         List<Integer> arrList = new ArrayList<>();
         List<Integer> linkedList = new LinkedList<>();
