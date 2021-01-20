@@ -24,8 +24,6 @@ public class MapExample {
         System.out.println("Получить ключи: " + users.keySet());
         System.out.println("Получить значения: " + users.values());
 
-        Stream streamUsers = users.entrySet().stream();
-        streamUsers.sorted(Comparator.comparing().reversed()).forEach(System.out::println);
     }
 }
 
